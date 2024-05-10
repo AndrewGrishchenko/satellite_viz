@@ -1,6 +1,0 @@
-source;share/satellite_run/hook/pythonpath.ps1
-source;share/satellite_run/hook/pythonpath.dsv
-source;share/satellite_run/hook/pythonpath.sh
-source;share/satellite_run/hook/ament_prefix_path.ps1
-source;share/satellite_run/hook/ament_prefix_path.dsv
-source;share/satellite_run/hook/ament_prefix_path.sh

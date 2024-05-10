@@ -1,6 +1,0 @@
-msg/SatelliteVec.idl
-msg/SatelliteVec.msg
-srv/SatelliteName.idl
-srv/SatelliteName.srv
-srv/SatelliteName_Request.msg
-srv/SatelliteName_Response.msg

@@ -1,7 +1,0 @@
-{
-  "package_name": "satellite_interfaces",
-  "non_idl_tuples": [
-    "/home/andrew/leto/src/satellite_interfaces:srv/SatelliteName.srv",
-    "/home/andrew/leto/src/satellite_interfaces:msg/SatelliteVec.msg"
-  ]
-}

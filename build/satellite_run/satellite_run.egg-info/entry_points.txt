@@ -1,5 +1,0 @@
-[console_scripts]
-satellite_runner = satellite_run.SatelliteRunner:main
-satellite_utils = satellite_run.SatelliteUtils:main
-state_publisher = satellite_run.StatePublisher:main
-
