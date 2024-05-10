@@ -45,9 +45,18 @@ class SatelliteUtils(Node):
         desc_publisher.publish(msg)        
 
         init_pos = Vector3()
-        init_pos.z = 12.0
+        # init_pos.z = 12.0
 
-        self.satellites[request.name] = [init_pos, Vector3(), Vector3()]
+        init_pos.x = 3.7475755239349895
+        init_pos.y = 0.0
+        init_pos.z = 11.39981042352913
+
+        init_rot = Vector3()
+        init_rot.x = 0.0
+        init_rot.y = 3.46
+        init_rot.z = 0.0
+
+        self.satellites[request.name] = [init_pos, init_rot, Vector3()]
 
         response.success = True
         return response
@@ -71,32 +80,45 @@ class SatelliteUtils(Node):
     def perform_rot(self, frame_id):
         r = 12.0
 
-        # self.satellites[frame_id][1].x += 0.0005
-
         x_rot = self.satellites[frame_id][1].x
         y_rot = self.satellites[frame_id][1].y + 1.57
         z_rot = self.satellites[frame_id][1].z
 
-        
-        # x_pos = r * cos(x_rot) * cos(z_rot)
-        # y_pos = r * cos(x_rot) * sin(z_rot)
-        # z_pos = r * sin(x_rot)
-
         x_pos = self.satellites[frame_id][0].x
         z_pos = self.satellites[frame_id][0].z
-        
-        # w = 0.006 / r
-        # self.satellites[frame_id][1].y += w
-
-        # self.satellites[frame_id][0].x = r * sin(self.satellites[frame_id][1].y)
-        # self.satellites[frame_id][0].z = r * cos(self.satellites[frame_id][1].y)
 
         self.satellites[frame_id][0].x = r * cos(z_rot) * cos(y_rot)
         self.satellites[frame_id][0].y = r * sin(z_rot) * cos(y_rot)
         self.satellites[frame_id][0].z = -r * sin(y_rot)
 
-        self.satellites[frame_id][1].y += 0.001
+        # self.satellites[frame_id][1].y += 0.001
         # self.satellites[frame_id][1].z = 0.15
+
+    def perform_gravity(self, frame_id):
+        a = 0.05 / 1000
+        # v = 4 / 1000
+        r = 12.0
+        v = sqrt(a * r)
+
+        #move to center
+        # if self.satellites[frame_id][0].x > 0:
+        #     self.satellites[frame_id][0].x += a * sin(self.satellites[frame_id][1].y)
+        # else:
+        #     self.satellites[frame_id][0].x -= a * sin(self.satellites[frame_id][1].y)
+        
+        # if self.satellites[frame_id][0].z > 0:
+        #     self.satellites[frame_id][0].z += a * cos(self.satellites[frame_id][1].y)
+        # else:
+        #     self.satellites[frame_id][0].z -= a * cos(self.satellites[frame_id][1].y)
+
+
+        #move by kas
+        self.satellites[frame_id][0].x += -v * cos(self.satellites[frame_id][1].y)
+        self.satellites[frame_id][0].z += v * sin(self.satellites[frame_id][1].y)
+
+        w = v / r
+        self.satellites[frame_id][1].y += w
+
 
     def handle_satellites(self, frame_id):
         odom_trans = TransformStamped()
@@ -117,7 +139,8 @@ class SatelliteUtils(Node):
         odom_rot.transform.translation.y = 0.0
         odom_rot.transform.translation.z = 0.0
 
-        self.perform_rot(frame_id)
+        # self.perform_rot(frame_id)
+        self.perform_gravity(frame_id)
 
         odom_rot.transform.rotation = euler_to_quaternion(self.satellites[frame_id][1].x, self.satellites[frame_id][1].y, self.satellites[frame_id][1].z)
 

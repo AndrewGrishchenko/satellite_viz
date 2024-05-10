@@ -4,6 +4,8 @@ satellite_interfaces.egg-info/PKG-INFO
 satellite_interfaces.egg-info/SOURCES.txt
 satellite_interfaces.egg-info/dependency_links.txt
 satellite_interfaces.egg-info/top_level.txt
+satellite_interfaces/msg/__init__.py
+satellite_interfaces/msg/_satellite_vec.py
 satellite_interfaces/srv/__init__.py
 satellite_interfaces/srv/_satellite_data.py
 satellite_interfaces/srv/_satellite_name.py
