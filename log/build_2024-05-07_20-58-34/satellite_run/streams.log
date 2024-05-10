@@ -1,0 +1,38 @@
+[0.767s] Invoking command in '/home/andrew/leto/src/satellite_run': PYTHONPATH=/home/andrew/leto/build/satellite_run/prefix_override:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/satellite_run build --build-base /home/andrew/leto/build/satellite_run/build install --record /home/andrew/leto/build/satellite_run/install.log --single-version-externally-managed
+[0.947s] running egg_info
+[0.948s] creating ../../build/satellite_run/satellite_run.egg-info
+[0.948s] writing ../../build/satellite_run/satellite_run.egg-info/PKG-INFO
+[0.948s] writing dependency_links to ../../build/satellite_run/satellite_run.egg-info/dependency_links.txt
+[0.948s] writing entry points to ../../build/satellite_run/satellite_run.egg-info/entry_points.txt
+[0.948s] writing requirements to ../../build/satellite_run/satellite_run.egg-info/requires.txt
+[0.948s] writing top-level names to ../../build/satellite_run/satellite_run.egg-info/top_level.txt
+[0.948s] writing manifest file '../../build/satellite_run/satellite_run.egg-info/SOURCES.txt'
+[0.951s] reading manifest file '../../build/satellite_run/satellite_run.egg-info/SOURCES.txt'
+[0.952s] writing manifest file '../../build/satellite_run/satellite_run.egg-info/SOURCES.txt'
+[0.952s] running build
+[0.952s] running build_py
+[0.952s] creating /home/andrew/leto/build/satellite_run/build
+[0.952s] creating /home/andrew/leto/build/satellite_run/build/lib
+[0.952s] creating /home/andrew/leto/build/satellite_run/build/lib/satellite_run
+[0.952s] copying satellite_run/SatelliteRunner.py -> /home/andrew/leto/build/satellite_run/build/lib/satellite_run
+[0.952s] copying satellite_run/__init__.py -> /home/andrew/leto/build/satellite_run/build/lib/satellite_run
+[0.952s] running install
+[0.960s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[0.961s]   warnings.warn(
+[0.961s] running install_lib
+[0.961s] creating /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run
+[0.961s] copying /home/andrew/leto/build/satellite_run/build/lib/satellite_run/SatelliteRunner.py -> /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run
+[0.961s] copying /home/andrew/leto/build/satellite_run/build/lib/satellite_run/__init__.py -> /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run
+[0.962s] byte-compiling /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run/SatelliteRunner.py to SatelliteRunner.cpython-310.pyc
+[0.962s] byte-compiling /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run/__init__.py to __init__.cpython-310.pyc
+[0.962s] running install_data
+[0.962s] creating /home/andrew/leto/install/satellite_run/share/ament_index
+[0.962s] creating /home/andrew/leto/install/satellite_run/share/ament_index/resource_index
+[0.962s] creating /home/andrew/leto/install/satellite_run/share/ament_index/resource_index/packages
+[0.963s] copying resource/satellite_run -> /home/andrew/leto/install/satellite_run/share/ament_index/resource_index/packages
+[0.963s] copying package.xml -> /home/andrew/leto/install/satellite_run/share/satellite_run
+[0.963s] running install_egg_info
+[0.964s] Copying ../../build/satellite_run/satellite_run.egg-info to /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run-0.0.0-py3.10.egg-info
+[0.964s] running install_scripts
+[0.978s] writing list of installed files to '/home/andrew/leto/build/satellite_run/install.log'
+[1.003s] Invoked command in '/home/andrew/leto/src/satellite_run' returned '0': PYTHONPATH=/home/andrew/leto/build/satellite_run/prefix_override:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/satellite_run build --build-base /home/andrew/leto/build/satellite_run/build install --record /home/andrew/leto/build/satellite_run/install.log --single-version-externally-managed

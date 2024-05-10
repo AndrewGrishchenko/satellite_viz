@@ -1,0 +1,33 @@
+<robot name="satellite">
+  <link name="base_link">
+  </link>
+  
+  <link name="NAME">
+  </link>
+  
+  <link name="end_NAME">
+    <visual>
+      <geometry>
+        <cylinder length="1" radius="0.2"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+      <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+  
+  <joint name="move" type="continuous">
+    <parent link="base_link"/>
+    <child link="NAME"/>
+    <axis xyz="0 0 0"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  
+  <joint name="rotate" type="continuous">
+    <parent link="NAME"/>
+    <child link="end_NAME"/>
+    <axis xyz="0 0 0"/>
+    <origin xyz="0 0 12"/>
+  </joint>
+</robot>

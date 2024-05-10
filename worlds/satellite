@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<sdf version="1.4">
+  <model name="satellite">
+    <pose>0 0 0 0 0 0</pose>
+    <static>false</static>
+    <visual name="visual">
+      <geometry>
+        <capsule>
+          <radius>0.2</radius>
+          <length>0.6</length>
+        </capsule>
+      </geometry>
+    </visual>
+  </model>
+</sdf>

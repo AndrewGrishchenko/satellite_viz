@@ -1,0 +1,371 @@
+[0.000000] (-) TimerEvent: {}
+[0.000362] (-) JobUnselected: {'identifier': 'satellite_run'}
+[0.000428] (satellite_interfaces) JobQueued: {'identifier': 'satellite_interfaces', 'dependencies': OrderedDict()}
+[0.000720] (satellite_interfaces) JobStarted: {'identifier': 'satellite_interfaces'}
+[0.057170] (satellite_interfaces) JobProgress: {'identifier': 'satellite_interfaces', 'progress': 'cmake'}
+[0.057884] (satellite_interfaces) JobProgress: {'identifier': 'satellite_interfaces', 'progress': 'build'}
+[0.058045] (satellite_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/andrew/leto/build/satellite_interfaces', '--', '-j6', '-l6'], 'cwd': '/home/andrew/leto/build/satellite_interfaces', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'andrew'), ('LC_TIME', 'en_US.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/andrew/leto/install/satellite_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/iron/opt/rviz_ogre_vendor/lib:/opt/ros/iron/lib/x86_64-linux-gnu:/opt/ros/iron/lib'), ('HOME', '/home/andrew'), ('OLDPWD', '/home/andrew'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'en_US.UTF-8'), ('MANAGERPID', '2156'), ('SYSTEMD_EXEC_PID', '2484'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3928'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/andrew/leto/install'), ('ROS_DISTRO', 'iron'), ('LOGNAME', 'andrew'), ('JOURNAL_STREAM', '8:33088'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'andrew'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('PATH', '/opt/ros/iron/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/andrew-ubuntu:@/tmp/.ICE-unix/2297,unix/andrew-ubuntu:/tmp/.ICE-unix/2297'), ('INVOCATION_ID', 'd01f5fc413bb412fac50c0b1b6a29480'), ('PAPERSIZE', 'letter'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_US.UTF-8'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.VZS1M2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/andrew/leto/install/satellite_run:/home/andrew/leto/install/satellite_interfaces:/opt/ros/iron'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:d01f60a1-7d1f-40c3-b131-ee99ac28cefd'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('ROS_AUTOMATIC_DISCOVERY_RANGE', 'SUBNET'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/andrew/leto/build/satellite_interfaces'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages:/opt/ros/iron/lib/python3.10/site-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/andrew/leto/install/satellite_interfaces:/home/andrew/leto/install/satellite_run:/opt/ros/iron')]), 'shell': False}
+[0.082352] (satellite_interfaces) StdoutLine: {'line': b'-- Found geometry_msgs: 5.0.0 (/opt/ros/iron/share/geometry_msgs/cmake)\n'}
+[0.099786] (-) TimerEvent: {}
+[0.200358] (-) TimerEvent: {}
+[0.221545] (satellite_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.0.1 (/opt/ros/iron/share/rosidl_generator_c/cmake)\n'}
+[0.226441] (satellite_interfaces) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.0.1 (/opt/ros/iron/share/rosidl_generator_cpp/cmake)\n'}
+[0.241334] (satellite_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.251365] (satellite_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.300463] (-) TimerEvent: {}
+[0.318251] (satellite_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.5.0 (/opt/ros/iron/share/rosidl_default_generators/cmake)\n'}
+[0.322778] (satellite_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)\n'}
+[0.400589] (-) TimerEvent: {}
+[0.500964] (-) TimerEvent: {}
+[0.601260] (-) TimerEvent: {}
+[0.664504] (satellite_interfaces) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.11.2 (/opt/ros/iron/share/ament_cmake_ros/cmake)\n'}
+[0.701347] (-) TimerEvent: {}
+[0.801587] (-) TimerEvent: {}
+[0.901898] (-) TimerEvent: {}
+[1.002265] (-) TimerEvent: {}
+[1.004873] (satellite_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.102432] (-) TimerEvent: {}
+[1.126533] (satellite_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.147379] (satellite_interfaces) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.2 (/opt/ros/iron/share/python_cmake_module/cmake)\n'}
+[1.166167] (satellite_interfaces) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[1.166323] (satellite_interfaces) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[1.166362] (satellite_interfaces) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[1.196155] (satellite_interfaces) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)\n'}
+[1.202287] (satellite_interfaces) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[1.202488] (-) TimerEvent: {}
+[1.203230] (satellite_interfaces) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[1.204886] (satellite_interfaces) StdoutLine: {'line': b'-- Configuring done\n'}
+[1.245194] (satellite_interfaces) StdoutLine: {'line': b'-- Generating done\n'}
+[1.248427] (satellite_interfaces) StdoutLine: {'line': b'-- Build files have been written to: /home/andrew/leto/build/satellite_interfaces\n'}
+[1.290837] (satellite_interfaces) StdoutLine: {'line': b'[  2%] \x1b[34m\x1b[1mGenerating type hashes for ROS interfaces\x1b[0m\n'}
+[1.295508] (satellite_interfaces) StdoutLine: {'line': b'[  2%] Built target ament_cmake_python_copy_satellite_interfaces\n'}
+[1.302672] (-) TimerEvent: {}
+[1.403009] (-) TimerEvent: {}
+[1.472328] (satellite_interfaces) StdoutLine: {'line': b'running egg_info\n'}
+[1.472904] (satellite_interfaces) StdoutLine: {'line': b'writing satellite_interfaces.egg-info/PKG-INFO\n'}
+[1.473121] (satellite_interfaces) StdoutLine: {'line': b'writing dependency_links to satellite_interfaces.egg-info/dependency_links.txt\n'}
+[1.473390] (satellite_interfaces) StdoutLine: {'line': b'writing top-level names to satellite_interfaces.egg-info/top_level.txt\n'}
+[1.474647] (satellite_interfaces) StdoutLine: {'line': b"reading manifest file 'satellite_interfaces.egg-info/SOURCES.txt'\n"}
+[1.474922] (satellite_interfaces) StdoutLine: {'line': b"writing manifest file 'satellite_interfaces.egg-info/SOURCES.txt'\n"}
+[1.488540] (satellite_interfaces) StdoutLine: {'line': b'[  2%] Built target satellite_interfaces__rosidl_generator_type_description\n'}
+[1.496645] (satellite_interfaces) StdoutLine: {'line': b'[  4%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[1.501426] (satellite_interfaces) StdoutLine: {'line': b'[  4%] Built target ament_cmake_python_build_satellite_interfaces_egg\n'}
+[1.503088] (-) TimerEvent: {}
+[1.503826] (satellite_interfaces) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[1.603318] (-) TimerEvent: {}
+[1.703792] (-) TimerEvent: {}
+[1.804168] (-) TimerEvent: {}
+[1.831513] (satellite_interfaces) StdoutLine: {'line': b'[  6%] Built target satellite_interfaces__cpp\n'}
+[1.877081] (satellite_interfaces) StdoutLine: {'line': b'[ 13%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_vec__description.c.o\x1b[0m\n'}
+[1.877329] (satellite_interfaces) StdoutLine: {'line': b'[ 18%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_name__type_support.c.o\x1b[0m\n'}
+[1.877380] (satellite_interfaces) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_name__functions.c.o\x1b[0m\n'}
+[1.877419] (satellite_interfaces) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_vec__functions.c.o\x1b[0m\n'}
+[1.877456] (satellite_interfaces) StdoutLine: {'line': b'[ 18%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_vec__type_support.c.o\x1b[0m\n'}
+[1.878298] (satellite_interfaces) StdoutLine: {'line': b'[ 20%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_c.dir/rosidl_generator_c/satellite_interfaces/srv/detail/satellite_name__description.c.o\x1b[0m\n'}
+[1.904326] (-) TimerEvent: {}
+[1.948774] (satellite_interfaces) StdoutLine: {'line': b'[ 22%] \x1b[32m\x1b[1mLinking C shared library libsatellite_interfaces__rosidl_generator_c.so\x1b[0m\n'}
+[1.994799] (satellite_interfaces) StdoutLine: {'line': b'[ 22%] Built target satellite_interfaces__rosidl_generator_c\n'}
+[2.003019] (satellite_interfaces) StdoutLine: {'line': b'[ 31%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.003199] (satellite_interfaces) StdoutLine: {'line': b'[ 31%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[2.003263] (satellite_interfaces) StdoutLine: {'line': b'[ 31%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[2.003709] (satellite_interfaces) StdoutLine: {'line': b'[ 31%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.004111] (satellite_interfaces) StdoutLine: {'line': b'[ 34%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[2.004222] (satellite_interfaces) StdoutLine: {'line': b'[ 36%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[2.004354] (-) TimerEvent: {}
+[2.104550] (-) TimerEvent: {}
+[2.204812] (-) TimerEvent: {}
+[2.299025] (satellite_interfaces) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/satellite_interfaces/srv/satellite_name__type_support.cpp.o\x1b[0m\n'}
+[2.304899] (-) TimerEvent: {}
+[2.336609] (satellite_interfaces) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/satellite_interfaces/srv/detail/satellite_name__type_support.cpp.o\x1b[0m\n'}
+[2.349989] (satellite_interfaces) StdoutLine: {'line': b'[ 43%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/satellite_interfaces/srv/satellite_vec__type_support.cpp.o\x1b[0m\n'}
+[2.399440] (satellite_interfaces) StdoutLine: {'line': b'[ 45%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/satellite_interfaces/srv/detail/satellite_name__type_support.c.o\x1b[0m\n'}
+[2.399903] (satellite_interfaces) StdoutLine: {'line': b'[ 47%] \x1b[32m\x1b[1mLinking CXX shared library libsatellite_interfaces__rosidl_typesupport_c.so\x1b[0m\n'}
+[2.405617] (-) TimerEvent: {}
+[2.418735] (satellite_interfaces) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/satellite_interfaces/srv/detail/dds_fastrtps/satellite_name__type_support.cpp.o\x1b[0m\n'}
+[2.426280] (satellite_interfaces) StdoutLine: {'line': b'[ 52%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/satellite_interfaces/srv/satellite_name__type_support.cpp.o\x1b[0m\n'}
+[2.454308] (satellite_interfaces) StdoutLine: {'line': b'[ 52%] Built target satellite_interfaces__rosidl_typesupport_c\n'}
+[2.454846] (satellite_interfaces) StdoutLine: {'line': b'[ 54%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/satellite_interfaces/srv/detail/satellite_vec__type_support.c.o\x1b[0m\n'}
+[2.462943] (satellite_interfaces) StdoutLine: {'line': b'[ 56%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/satellite_interfaces/srv/satellite_vec__type_support.cpp.o\x1b[0m\n'}
+[2.505954] (-) TimerEvent: {}
+[2.512544] (satellite_interfaces) StdoutLine: {'line': b'[ 59%] \x1b[32m\x1b[1mLinking C shared library libsatellite_interfaces__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[2.556231] (satellite_interfaces) StdoutLine: {'line': b'[ 61%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/satellite_interfaces/srv/detail/satellite_name__type_support_c.cpp.o\x1b[0m\n'}
+[2.571958] (satellite_interfaces) StdoutLine: {'line': b'[ 61%] Built target satellite_interfaces__rosidl_typesupport_introspection_c\n'}
+[2.579531] (satellite_interfaces) StdoutLine: {'line': b'[ 63%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/satellite_interfaces/srv/detail/satellite_vec__type_support_c.cpp.o\x1b[0m\n'}
+[2.606068] (-) TimerEvent: {}
+[2.706401] (-) TimerEvent: {}
+[2.806733] (-) TimerEvent: {}
+[2.848620] (satellite_interfaces) StdoutLine: {'line': b'[ 65%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/satellite_interfaces/srv/detail/satellite_vec__type_support.cpp.o\x1b[0m\n'}
+[2.906859] (-) TimerEvent: {}
+[2.928748] (satellite_interfaces) StdoutLine: {'line': b'[ 68%] \x1b[32mBuilding CXX object CMakeFiles/satellite_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/satellite_interfaces/srv/detail/dds_fastrtps/satellite_vec__type_support.cpp.o\x1b[0m\n'}
+[2.959577] (satellite_interfaces) StdoutLine: {'line': b'[ 70%] \x1b[32m\x1b[1mLinking CXX shared library libsatellite_interfaces__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[2.969494] (satellite_interfaces) StdoutLine: {'line': b'[ 72%] \x1b[32m\x1b[1mLinking CXX shared library libsatellite_interfaces__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[3.007001] (-) TimerEvent: {}
+[3.084096] (satellite_interfaces) StdoutLine: {'line': b'[ 72%] Built target satellite_interfaces__rosidl_typesupport_cpp\n'}
+[3.085127] (satellite_interfaces) StdoutLine: {'line': b'[ 72%] Built target satellite_interfaces__rosidl_typesupport_fastrtps_c\n'}
+[3.107183] (-) TimerEvent: {}
+[3.207890] (-) TimerEvent: {}
+[3.306268] (satellite_interfaces) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX shared library libsatellite_interfaces__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[3.307972] (-) TimerEvent: {}
+[3.398344] (satellite_interfaces) StdoutLine: {'line': b'[ 75%] Built target satellite_interfaces__rosidl_typesupport_introspection_cpp\n'}
+[3.408106] (-) TimerEvent: {}
+[3.481848] (satellite_interfaces) StdoutLine: {'line': b'[ 77%] \x1b[32m\x1b[1mLinking CXX shared library libsatellite_interfaces__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[3.508238] (-) TimerEvent: {}
+[3.555966] (satellite_interfaces) StdoutLine: {'line': b'[ 77%] Built target satellite_interfaces__rosidl_typesupport_fastrtps_cpp\n'}
+[3.576653] (satellite_interfaces) StdoutLine: {'line': b'[ 77%] Built target satellite_interfaces\n'}
+[3.595126] (satellite_interfaces) StdoutLine: {'line': b'[ 79%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[3.608371] (-) TimerEvent: {}
+[3.708688] (-) TimerEvent: {}
+[3.809033] (-) TimerEvent: {}
+[3.909496] (-) TimerEvent: {}
+[4.010031] (-) TimerEvent: {}
+[4.029646] (satellite_interfaces) StdoutLine: {'line': b'[ 79%] Built target satellite_interfaces__py\n'}
+[4.049872] (satellite_interfaces) StdoutLine: {'line': b'[ 84%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_py.dir/rosidl_generator_py/satellite_interfaces/srv/_satellite_name_s.c.o\x1b[0m\n'}
+[4.050038] (satellite_interfaces) StdoutLine: {'line': b'[ 84%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_generator_py.dir/rosidl_generator_py/satellite_interfaces/srv/_satellite_vec_s.c.o\x1b[0m\n'}
+[4.110175] (-) TimerEvent: {}
+[4.155112] (satellite_interfaces) StdoutLine: {'line': b'[ 86%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/satellite_interfaces/libsatellite_interfaces__rosidl_generator_py.so\x1b[0m\n'}
+[4.193013] (satellite_interfaces) StdoutLine: {'line': b'[ 86%] Built target satellite_interfaces__rosidl_generator_py\n'}
+[4.204635] (satellite_interfaces) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target satellite_interfaces__rosidl_typesupport_fastrtps_c__pyext\x1b[0m\n'}
+[4.208215] (satellite_interfaces) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target satellite_interfaces__rosidl_typesupport_introspection_c__pyext\x1b[0m\n'}
+[4.208401] (satellite_interfaces) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target satellite_interfaces__rosidl_typesupport_c__pyext\x1b[0m\n'}
+[4.210243] (-) TimerEvent: {}
+[4.214252] (satellite_interfaces) StdoutLine: {'line': b'[ 88%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[4.218480] (satellite_interfaces) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[4.218642] (satellite_interfaces) StdoutLine: {'line': b'[ 93%] \x1b[32mBuilding C object CMakeFiles/satellite_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[4.310360] (-) TimerEvent: {}
+[4.318858] (satellite_interfaces) StdoutLine: {'line': b'[ 95%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.331708] (satellite_interfaces) StdoutLine: {'line': b'[ 97%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.336774] (satellite_interfaces) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[4.377925] (satellite_interfaces) StdoutLine: {'line': b'[100%] Built target satellite_interfaces__rosidl_typesupport_c__pyext\n'}
+[4.381630] (satellite_interfaces) StdoutLine: {'line': b'[100%] Built target satellite_interfaces__rosidl_typesupport_fastrtps_c__pyext\n'}
+[4.383188] (satellite_interfaces) StdoutLine: {'line': b'[100%] Built target satellite_interfaces__rosidl_typesupport_introspection_c__pyext\n'}
+[4.398383] (satellite_interfaces) CommandEnded: {'returncode': 0}
+[4.410545] (-) TimerEvent: {}
+[4.481641] (satellite_interfaces) JobProgress: {'identifier': 'satellite_interfaces', 'progress': 'install'}
+[4.495989] (satellite_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/andrew/leto/build/satellite_interfaces'], 'cwd': '/home/andrew/leto/build/satellite_interfaces', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'andrew'), ('LC_TIME', 'en_US.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/andrew/leto/install/satellite_interfaces/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/iron/opt/rviz_ogre_vendor/lib:/opt/ros/iron/lib/x86_64-linux-gnu:/opt/ros/iron/lib'), ('HOME', '/home/andrew'), ('OLDPWD', '/home/andrew'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'en_US.UTF-8'), ('MANAGERPID', '2156'), ('SYSTEMD_EXEC_PID', '2484'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3928'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/andrew/leto/install'), ('ROS_DISTRO', 'iron'), ('LOGNAME', 'andrew'), ('JOURNAL_STREAM', '8:33088'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'andrew'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('PATH', '/opt/ros/iron/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/andrew-ubuntu:@/tmp/.ICE-unix/2297,unix/andrew-ubuntu:/tmp/.ICE-unix/2297'), ('INVOCATION_ID', 'd01f5fc413bb412fac50c0b1b6a29480'), ('PAPERSIZE', 'letter'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_US.UTF-8'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('LC_TELEPHONE', 'en_US.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.VZS1M2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/andrew/leto/install/satellite_run:/home/andrew/leto/install/satellite_interfaces:/opt/ros/iron'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_US.UTF-8'), ('TERMINATOR_UUID', 'urn:uuid:d01f60a1-7d1f-40c3-b131-ee99ac28cefd'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'en_US.UTF-8'), ('LC_IDENTIFICATION', 'en_US.UTF-8'), ('ROS_AUTOMATIC_DISCOVERY_RANGE', 'SUBNET'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/andrew/leto/build/satellite_interfaces'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages:/opt/ros/iron/lib/python3.10/site-packages'), ('LC_NUMERIC', 'en_US.UTF-8'), ('LC_PAPER', 'en_US.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/andrew/leto/install/satellite_interfaces:/home/andrew/leto/install/satellite_run:/opt/ros/iron')]), 'shell': False}
+[4.502054] (satellite_interfaces) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[4.502162] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/ament_index/resource_index/rosidl_interfaces/satellite_interfaces\n'}
+[4.502205] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteName.json\n'}
+[4.503293] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteVec.json\n'}
+[4.504201] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.504249] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg\n'}
+[4.504292] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg/rosidl_generator_c__visibility_control.h\n'}
+[4.504336] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.504370] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_set_pos.h\n'}
+[4.504410] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_vec.h\n'}
+[4.505489] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/spawn_satellite.h\n'}
+[4.505563] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_name.h\n'}
+[4.505602] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_data.h\n'}
+[4.505637] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.505672] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__struct.h\n'}
+[4.505707] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__description.c\n'}
+[4.506671] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__functions.h\n'}
+[4.506716] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__functions.h\n'}
+[4.507198] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__struct.h\n'}
+[4.507301] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__functions.c\n'}
+[4.507345] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__struct.h\n'}
+[4.507383] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__functions.h\n'}
+[4.508297] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__struct.h\n'}
+[4.508359] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__type_support.c\n'}
+[4.508896] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__description.c\n'}
+[4.508969] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__functions.h\n'}
+[4.509008] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__type_support.h\n'}
+[4.509050] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__type_support.h\n'}
+[4.509084] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__functions.c\n'}
+[4.509117] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__type_support.c\n'}
+[4.509151] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__type_support.h\n'}
+[4.509183] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__functions.c\n'}
+[4.510432] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__functions.c\n'}
+[4.510525] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__description.c\n'}
+[4.510562] (-) TimerEvent: {}
+[4.510640] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__type_support.c\n'}
+[4.510688] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__type_support.h\n'}
+[4.510722] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__functions.h\n'}
+[4.510756] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__struct.h\n'}
+[4.511411] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__description.c\n'}
+[4.511517] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__type_support.c\n'}
+[4.511566] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__functions.c\n'}
+[4.511609] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__description.c\n'}
+[4.511655] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__type_support.h\n'}
+[4.511709] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__type_support.c\n'}
+[4.511743] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/library_path.sh\n'}
+[4.511775] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/library_path.dsv\n'}
+[4.511837] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_generator_c.so\n'}
+[4.512240] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_generator_c.so" to ""\n'}
+[4.512343] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.512414] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg\n'}
+[4.512469] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[4.512512] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.512569] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.512637] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__rosidl_typesupport_fastrtps_c.h\n'}
+[4.512684] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__rosidl_typesupport_fastrtps_c.h\n'}
+[4.512726] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__rosidl_typesupport_fastrtps_c.h\n'}
+[4.512768] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__rosidl_typesupport_fastrtps_c.h\n'}
+[4.512834] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__rosidl_typesupport_fastrtps_c.h\n'}
+[4.512871] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_fastrtps_c.so\n'}
+[4.513180] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[4.513259] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.513324] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.513364] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_data.hpp\n'}
+[4.513410] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_set_pos.hpp\n'}
+[4.513454] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_vec.hpp\n'}
+[4.513516] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/satellite_name.hpp\n'}
+[4.513581] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/spawn_satellite.hpp\n'}
+[4.513637] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.513693] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__struct.hpp\n'}
+[4.513727] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__traits.hpp\n'}
+[4.513771] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__traits.hpp\n'}
+[4.513812] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__builder.hpp\n'}
+[4.513878] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__struct.hpp\n'}
+[4.513921] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__traits.hpp\n'}
+[4.513976] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__builder.hpp\n'}
+[4.514528] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__struct.hpp\n'}
+[4.517465] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__struct.hpp\n'}
+[4.518024] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__struct.hpp\n'}
+[4.521260] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__builder.hpp\n'}
+[4.521418] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__traits.hpp\n'}
+[4.521469] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__traits.hpp\n'}
+[4.521506] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__builder.hpp\n'}
+[4.521541] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__builder.hpp\n'}
+[4.521575] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.521610] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg\n'}
+[4.521643] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[4.521678] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.521717] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.521750] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[4.521786] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[4.521835] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[4.521888] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/dds_fastrtps\n'}
+[4.521959] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[4.522004] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[4.522053] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_fastrtps_cpp.so\n'}
+[4.522123] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[4.522178] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.522220] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg\n'}
+[4.522268] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[4.522310] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.522371] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.522406] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__type_support.c\n'}
+[4.522440] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__rosidl_typesupport_introspection_c.h\n'}
+[4.522473] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__type_support.c\n'}
+[4.522506] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__rosidl_typesupport_introspection_c.h\n'}
+[4.522558] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__rosidl_typesupport_introspection_c.h\n'}
+[4.522600] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__rosidl_typesupport_introspection_c.h\n'}
+[4.522643] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__type_support.c\n'}
+[4.522690] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__type_support.c\n'}
+[4.522723] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__rosidl_typesupport_introspection_c.h\n'}
+[4.522756] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__type_support.c\n'}
+[4.522821] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_introspection_c.so\n'}
+[4.522870] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_introspection_c.so" to ""\n'}
+[4.522918] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_c.so\n'}
+[4.522993] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_c.so" to ""\n'}
+[4.523040] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces\n'}
+[4.523111] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv\n'}
+[4.523147] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail\n'}
+[4.523180] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__rosidl_typesupport_introspection_cpp.hpp\n'}
+[4.523213] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__type_support.cpp\n'}
+[4.523286] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_set_pos__rosidl_typesupport_introspection_cpp.hpp\n'}
+[4.523321] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__rosidl_typesupport_introspection_cpp.hpp\n'}
+[4.523355] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__rosidl_typesupport_introspection_cpp.hpp\n'}
+[4.523390] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__rosidl_typesupport_introspection_cpp.hpp\n'}
+[4.523422] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_vec__type_support.cpp\n'}
+[4.523462] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/spawn_satellite__type_support.cpp\n'}
+[4.523495] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_data__type_support.cpp\n'}
+[4.523529] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/include/satellite_interfaces/satellite_interfaces/srv/detail/satellite_name__type_support.cpp\n'}
+[4.523562] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_introspection_cpp.so\n'}
+[4.523656] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[4.523758] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_cpp.so\n'}
+[4.524075] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_typesupport_cpp.so" to ""\n'}
+[4.524146] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/pythonpath.sh\n'}
+[4.524191] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/pythonpath.dsv\n'}
+[4.524236] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces-0.0.0-py3.10.egg-info\n'}
+[4.524345] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[4.524385] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[4.524435] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[4.524491] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[4.524531] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces\n'}
+[4.524573] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/libsatellite_interfaces__rosidl_generator_py.so\n'}
+[4.524629] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.524687] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv\n'}
+[4.524739] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_data_s.c\n'}
+[4.524796] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_vec.py\n'}
+[4.524837] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_name_s.c\n'}
+[4.524895] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_spawn_satellite_s.c\n'}
+[4.524940] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_spawn_satellite.py\n'}
+[4.524989] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_data.py\n'}
+[4.525030] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_set_pos_s.c\n'}
+[4.525075] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_vec_s.c\n'}
+[4.525119] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/__init__.py\n'}
+[4.525178] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_name.py\n'}
+[4.525224] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_set_pos.py\n'}
+[4.525276] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_c.c\n'}
+[4.525322] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.525378] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[4.525412] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.525447] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/__init__.py\n'}
+[4.525480] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/_satellite_interfaces_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[4.563298] (satellite_interfaces) StdoutLine: {'line': b"Listing '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces'...\n"}
+[4.563466] (satellite_interfaces) StdoutLine: {'line': b"Compiling '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/__init__.py'...\n"}
+[4.563508] (satellite_interfaces) StdoutLine: {'line': b"Listing '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv'...\n"}
+[4.563545] (satellite_interfaces) StdoutLine: {'line': b"Compiling '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/__init__.py'...\n"}
+[4.563579] (satellite_interfaces) StdoutLine: {'line': b"Compiling '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_name.py'...\n"}
+[4.563614] (satellite_interfaces) StdoutLine: {'line': b"Compiling '/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/srv/_satellite_vec.py'...\n"}
+[4.566798] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.566934] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[4.566984] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.567049] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[4.567147] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[4.567355] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages/satellite_interfaces/satellite_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[4.567444] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_generator_py.so\n'}
+[4.567607] (satellite_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/home/andrew/leto/install/satellite_interfaces/lib/libsatellite_interfaces__rosidl_generator_py.so" to ""\n'}
+[4.567670] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteName.idl\n'}
+[4.567728] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteVec.idl\n'}
+[4.567786] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteName.srv\n'}
+[4.567852] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteName_Request.msg\n'}
+[4.567919] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteName_Response.msg\n'}
+[4.567983] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteVec.srv\n'}
+[4.568051] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteVec_Request.msg\n'}
+[4.568119] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/srv/SatelliteVec_Response.msg\n'}
+[4.568188] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/ament_index/resource_index/package_run_dependencies/satellite_interfaces\n'}
+[4.568253] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/ament_index/resource_index/parent_prefix_path/satellite_interfaces\n'}
+[4.568349] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/ament_prefix_path.sh\n'}
+[4.568459] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/ament_prefix_path.dsv\n'}
+[4.568508] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/path.sh\n'}
+[4.568558] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/environment/path.dsv\n'}
+[4.568598] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/local_setup.bash\n'}
+[4.568659] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/local_setup.sh\n'}
+[4.568720] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/local_setup.zsh\n'}
+[4.568780] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/local_setup.dsv\n'}
+[4.568850] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/package.dsv\n'}
+[4.568897] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/ament_index/resource_index/packages/satellite_interfaces\n'}
+[4.568945] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_generator_cExport.cmake\n'}
+[4.569031] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_generator_cExport-noconfig.cmake\n'}
+[4.569085] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[4.569132] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[4.569201] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_generator_cppExport.cmake\n'}
+[4.569255] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[4.569304] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[4.569353] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_introspection_cExport.cmake\n'}
+[4.569431] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[4.569473] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_cExport.cmake\n'}
+[4.569513] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[4.569554] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[4.569608] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[4.569643] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_cppExport.cmake\n'}
+[4.569677] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfaces__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[4.569712] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_generator_pyExport.cmake\n'}
+[4.569746] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/export_satellite_interfaces__rosidl_generator_pyExport-noconfig.cmake\n'}
+[4.569780] (satellite_interfaces) StdoutLine: {'line': b'-- Installing: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/rosidl_cmake-extras.cmake\n'}
+[4.569815] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[4.569867] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[4.569901] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[4.569935] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[4.569967] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[4.570008] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[4.570041] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfacesConfig.cmake\n'}
+[4.570076] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/cmake/satellite_interfacesConfig-version.cmake\n'}
+[4.570109] (satellite_interfaces) StdoutLine: {'line': b'-- Up-to-date: /home/andrew/leto/install/satellite_interfaces/share/satellite_interfaces/package.xml\n'}
+[4.571585] (satellite_interfaces) CommandEnded: {'returncode': 0}
+[4.610726] (-) TimerEvent: {}
+[4.711405] (-) TimerEvent: {}
+[4.794507] (satellite_interfaces) JobEnded: {'identifier': 'satellite_interfaces', 'rc': 0}
+[4.794987] (-) EventReactorShutdown: {}

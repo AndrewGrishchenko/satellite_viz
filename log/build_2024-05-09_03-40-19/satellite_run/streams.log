@@ -1,0 +1,25 @@
+[1.082s] Invoking command in '/home/andrew/leto/src/satellite_run': PYTHONPATH=/home/andrew/leto/build/satellite_run/prefix_override:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/opt/ros/iron/lib/python3.10/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../../build/satellite_run build --build-base /home/andrew/leto/build/satellite_run/build install --record /home/andrew/leto/build/satellite_run/install.log --single-version-externally-managed
+[1.444s] running egg_info
+[1.447s] writing ../../build/satellite_run/satellite_run.egg-info/PKG-INFO
+[1.448s] writing dependency_links to ../../build/satellite_run/satellite_run.egg-info/dependency_links.txt
+[1.448s] writing entry points to ../../build/satellite_run/satellite_run.egg-info/entry_points.txt
+[1.448s] writing requirements to ../../build/satellite_run/satellite_run.egg-info/requires.txt
+[1.448s] writing top-level names to ../../build/satellite_run/satellite_run.egg-info/top_level.txt
+[1.452s] reading manifest file '../../build/satellite_run/satellite_run.egg-info/SOURCES.txt'
+[1.452s] writing manifest file '../../build/satellite_run/satellite_run.egg-info/SOURCES.txt'
+[1.452s] running build
+[1.452s] running build_py
+[1.453s] running install
+[1.453s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[1.453s]   warnings.warn(
+[1.453s] running install_lib
+[1.455s] running install_data
+[1.456s] running install_egg_info
+[1.457s] removing '/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run-0.0.0-py3.10.egg-info' (and everything under it)
+[1.458s] Copying ../../build/satellite_run/satellite_run.egg-info to /home/andrew/leto/install/satellite_run/lib/python3.10/site-packages/satellite_run-0.0.0-py3.10.egg-info
+[1.458s] running install_scripts
+[1.481s] Installing satellite_runner script to /home/andrew/leto/install/satellite_run/lib/satellite_run
+[1.482s] Installing satellite_utils script to /home/andrew/leto/install/satellite_run/lib/satellite_run
+[1.482s] Installing state_publisher script to /home/andrew/leto/install/satellite_run/lib/satellite_run
+[1.482s] writing list of installed files to '/home/andrew/leto/build/satellite_run/install.log'
+[1.536s] Invoked command in '/home/andrew/leto/src/satellite_run' returned '0': PYTHONPATH=/home/andrew/leto/build/satellite_run/prefix_override:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_interfaces/lib/python3.10/site-packages:/home/andrew/leto/install/satellite_run/lib/python3.10/site-packages:/opt/ros/iron/lib/python3.10/site-packages /usr/bin/python3 setup.py egg_info --egg-base ../../build/satellite_run build --build-base /home/andrew/leto/build/satellite_run/build install --record /home/andrew/leto/build/satellite_run/install.log --single-version-externally-managed

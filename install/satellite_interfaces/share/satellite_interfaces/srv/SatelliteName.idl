@@ -1,0 +1,15 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from satellite_interfaces/srv/SatelliteName.srv
+// generated code does not contain a copyright notice
+
+
+module satellite_interfaces {
+  module srv {
+    struct SatelliteName_Request {
+      string name;
+    };
+    struct SatelliteName_Response {
+      boolean success;
+    };
+  };
+};

@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "satellite_interfaces/srv/SatelliteSetPos_Response",
+      "fields": [
+        {
+          "name": "success",
+          "type": {
+            "type_id": 15,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "satellite_interfaces/srv/SatelliteSetPos_Response",
+      "hash_string": "RIHS01_1d8364c7e8fd160cf6e368f1e6dcb6a0724a5db223ef85004f194e22f26a952a"
+    }
+  ]
+}

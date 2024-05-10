@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from satellite_interfaces/srv/SatelliteSetPos.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/Vector3.idl"
+
+module satellite_interfaces {
+  module srv {
+    struct SatelliteSetPos_Request {
+      geometry_msgs::msg::Vector3 vector;
+
+      string name;
+    };
+    struct SatelliteSetPos_Response {
+      boolean success;
+    };
+  };
+};
