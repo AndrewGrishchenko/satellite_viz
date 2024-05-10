@@ -4,11 +4,16 @@ from rclpy.qos import QoSProfile
 from geometry_msgs.msg import Quaternion
 from sensor_msgs.msg import JointState
 from tf2_ros import TransformBroadcaster, TransformStamped
-from math import sin, cos, pi, atan, acos, sqrt
+from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin
 from geometry_msgs.msg import Vector3Stamped, Vector3
 from satellite_interfaces.msg import SatelliteVec
 from satellite_interfaces.srv import SatelliteName
 from std_msgs.msg import String
+
+from nav_msgs.msg import Path
+from geometry_msgs.msg import PoseStamped, Pose
+
+import numpy as np
 
 class SatelliteUtils(Node):
     def __init__(self):
@@ -26,10 +31,23 @@ class SatelliteUtils(Node):
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
 
-        #pos rot vel
+        #pos rot data[]
+        #data: path_ind
         self.satellites = {}
 
-        self.timer = self.create_timer(0.001, self.timer_callback)
+        self.timer = self.create_timer(0.01, self.timer_callback)
+
+        self.paths = {}
+
+        self.gen_paths()
+
+    def gen_paths(self):
+        self.make_path('1', [0.0, 0.0, 0.0])
+        self.make_path('2', [0.0, 0.0, 1.57])
+        self.make_path('3', [1.57, 0.0, 0.0])
+
+        self.make_path('4', [0.0, 0.0, 0.785])
+        self.make_path('5', [0.0, 0.0, -0.785])
 
     def spawn_callback(self, request, response):
         self.get_logger().info(f"spawning {request.name}")
@@ -47,16 +65,16 @@ class SatelliteUtils(Node):
         init_pos = Vector3()
         # init_pos.z = 12.0
 
-        init_pos.x = 3.7475755239349895
+        init_pos.x = 0.0
         init_pos.y = 0.0
-        init_pos.z = 11.39981042352913
+        init_pos.z = -12.0
 
         init_rot = Vector3()
         init_rot.x = 0.0
-        init_rot.y = 3.46
-        init_rot.z = 0.0
+        init_rot.y = 0.0
+        init_rot.z = 0.785
 
-        self.satellites[request.name] = [init_pos, init_rot, Vector3()]
+        self.satellites[request.name] = [init_pos, init_rot, [0]]
 
         response.success = True
         return response
@@ -94,11 +112,94 @@ class SatelliteUtils(Node):
         # self.satellites[frame_id][1].y += 0.001
         # self.satellites[frame_id][1].z = 0.15
 
+    def make_rot(self, mode, cur_pos, phi):
+        if mode == 'x':
+            m = np.array([[1, 0, 0], [0, cos(phi), -sin(phi)], [0, sin(phi), cos(phi)]])
+        elif mode == 'y':
+            m = np.array([[cos(phi), 0, sin(phi)], [0, 1, 0], [-sin(phi), 0, cos(phi)]])
+        elif mode == 'z':
+            m = np.array([[cos(phi), -sin(phi), 0], [sin(phi), cos(phi), 0], [0, 0, 1]])
+
+        pos = np.array([cur_pos.x, cur_pos.y, cur_pos.z])
+        pos = np.dot(pos, m)
+
+        res = Vector3()
+        res.x = pos[0]
+        res.y = pos[1]
+        res.z = pos[2]
+        return res
+
+
+    def make_path(self, name, phis, mode='xyz'):
+        cur_pos = Vector3()
+        cur_pos.x = 0.0
+        cur_pos.y = 0.0
+        cur_pos.z = 0.0
+
+        path = Path()
+        path.header.stamp = self.get_clock().now().to_msg()
+        path.header.frame_id = 'base_link'
+
+        rot = 0.0
+        r = 12
+        k = 10
+
+        for i in range(k * 361):
+            cur_pos.x = r * cos(rot) / sqrt(2)
+            cur_pos.y = r * cos(rot) / sqrt(2)
+            cur_pos.z = r * sin(rot)
+
+            cur_rot = Vector3()
+            cur_rot.y = 1.57 - rot
+
+            cur_pos = self.make_rot('z', cur_pos, 0.785)
+
+            for i in range(len(mode)):
+                cur_pos = self.make_rot(mode[i], cur_pos, phis[i])
+
+            rot += (pi / 180.0) / k
+
+            pose = PoseStamped()
+            pose.header.stamp = self.get_clock().now().to_msg()
+            pose.header.frame_id = 'base_link'
+            pose.pose.position.x = cur_pos.x
+            pose.pose.position.y = cur_pos.y
+            pose.pose.position.z = cur_pos.z
+
+            pose.pose.orientation.x = cur_rot.x
+            pose.pose.orientation.y = cur_rot.y
+            pose.pose.orientation.z = cur_rot.z
+
+            path.poses.append(pose)
+        
+        self.paths[name] = path
+        pub = self.create_publisher(Path, 'path_' + name, self.qos)
+        pub.publish(path)
+
+
     def perform_gravity(self, frame_id):
-        a = 0.05 / 1000
+        a = 0.01 / 1000
         # v = 4 / 1000
         r = 12.0
         v = sqrt(a * r)
+
+        self.satellites[frame_id][0].x = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.x
+        self.satellites[frame_id][0].y = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.y
+        self.satellites[frame_id][0].z = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.z
+        
+        # qx = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.x
+        # qy = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.y
+        # qz = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.z
+        # qw = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.w
+        #from tf_transformations import euler_from_quaternion
+        # roll, pitch, yaw = quaternion_to_euler(qx, qy, qz, qw)
+        self.satellites[frame_id][1].x = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.x
+        self.satellites[frame_id][1].y = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.y
+        self.satellites[frame_id][1].z = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.z
+
+        self.satellites[frame_id][2][0] += 1
+        if self.satellites[frame_id][2][0] >= len(self.paths['1'].poses):
+            self.satellites[frame_id][2][0] = 0
 
         #move to center
         # if self.satellites[frame_id][0].x > 0:
@@ -113,12 +214,18 @@ class SatelliteUtils(Node):
 
 
         #move by tangent
-        self.satellites[frame_id][0].x += -v * cos(self.satellites[frame_id][1].y)
-        self.satellites[frame_id][0].z += v * sin(self.satellites[frame_id][1].y)
+        # self.satellites[frame_id][0].x += -v * cos(self.satellites[frame_id][1].y)
+        # self.satellites[frame_id][0].y += -v * cos(self.satellites[frame_id][1].y)
+        # self.satellites[frame_id][0].z += v * sin(self.satellites[frame_id][1].y)
 
         #increasing angular velocity
-        w = v / r
-        self.satellites[frame_id][1].y += w
+        # w = v / r
+        # self.satellites[frame_id][1].y += w
+
+
+        
+
+
 
 
     def handle_satellites(self, frame_id):
@@ -170,6 +277,22 @@ def euler_to_quaternion(roll, pitch, yaw):
     qz = cos(roll/2) * cos(pitch/2) * sin(yaw/2) - sin(roll/2) * sin(pitch/2) * cos(yaw/2)
     qw = cos(roll/2) * cos(pitch/2) * cos(yaw/2) + sin(roll/2) * sin(pitch/2) * sin(yaw/2)
     return Quaternion(x=qx, y=qy, z=qz, w=qw)
+
+def quaternion_to_euler(x, y, z, w):
+        t0 = +2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        roll_x = atan2(t0, t1)
+     
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        pitch_y = asin(t2)
+     
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        yaw_z = atan2(t3, t4)
+     
+        return roll_x, pitch_y, yaw_z 
 
 def main():
     rclpy.init()
