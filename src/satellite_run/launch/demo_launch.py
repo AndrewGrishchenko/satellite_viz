@@ -16,27 +16,27 @@ def generate_launch_description():
     with open(urdf, 'r') as infp:
         robot_desc = infp.read()
 
+    satellites = {}
     
     with open(urdf, 'r') as infp:
-        satellite_1 = infp.read()
-        satellite_1 = satellite_1.replace('NAME', 'a')
+        file_data = infp.read()
+        
+        for i in range(1, 13):
+            satellites[i] = file_data.replace('NAME', str(i))
 
-    with open(urdf, 'r') as infp:
-        satellite_2 = infp.read()
-        satellite_2 = satellite_2.replace('NAME', 'b')
+    # with open(urdf, 'r') as infp:
+    #     satellite_1 = infp.read()
+    #     satellite_1 = satellite_1.replace('NAME', 'a')
+
+    # with open(urdf, 'r') as infp:
+    #     satellite_2 = infp.read()
+    #     satellite_2 = satellite_2.replace('NAME', 'b')
     
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='false',
             description='Use simulation (Gazebo) clock if true'),
-        # Node(
-        #     package='robot_state_publisher',
-        #     executable='robot_state_publisher',
-        #     name='robot_state_publisher',
-        #     output='screen',
-        #     parameters=[{'use_sim_time': use_sim_time, 'robot_description': robot_desc}],
-        #     arguments=[urdf]),
         
         Node(
             package='satellite_run',
@@ -49,13 +49,83 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='satellite_1_state_publisher',
             output='screen',
-            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellite_1}],
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[1]}],
             arguments=[urdf]),
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='satellite_2_state_publisher',
             output='screen',
-            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellite_2}],
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[2]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_3_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[3]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_4_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[4]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_5_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[5]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_6_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[6]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_7_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[7]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_8_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[8]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_9_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[9]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_10_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[10]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_11_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[11]}],
+            arguments=[urdf]),
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='satellite_12_state_publisher',
+            output='screen',
+            parameters=[{'use_sim_time': use_sim_time, 'robot_description': satellites[12]}],
             arguments=[urdf]),
     ])

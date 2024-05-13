@@ -1,0 +1,5 @@
+string name
+string path_name
+uint32 start_angle
+---
+bool success

@@ -7,7 +7,7 @@ from tf2_ros import TransformBroadcaster, TransformStamped
 from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin, tan
 from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray
 from satellite_interfaces.msg import SatelliteVec
-from satellite_interfaces.srv import SatelliteName
+from satellite_interfaces.srv import SatelliteName, SatelliteSpawn
 from std_msgs.msg import String
 
 from nav_msgs.msg import Path
@@ -23,7 +23,7 @@ class SatelliteUtils(Node):
         self.pos_sub = self.create_subscription(SatelliteVec, 'satellite_set_pos', self.pos_callback, 10)
         self.rot_sub = self.create_subscription(SatelliteVec, 'satellite_set_rot', self.rot_callback, 10)
 
-        self.spawn_srv = self.create_service(SatelliteName, 'satellite_spawn', self.spawn_callback)
+        self.spawn_srv = self.create_service(SatelliteSpawn, 'satellite_spawn', self.spawn_callback)
         self.remove_srv = self.create_service(SatelliteName, 'satellite_remove', self.remove_callback)
 
         # self.qos = QoSProfile(depth=10)
@@ -72,7 +72,7 @@ class SatelliteUtils(Node):
         init_rot.y = 0.0
         init_rot.z = 0.785
 
-        self.satellites[request.name] = [init_pos, init_rot, {'path_name': request.path_name, 'path_ind': 0}]
+        self.satellites[request.name] = [init_pos, init_rot, {'path_name': request.path_name, 'path_ind': request.start_angle * self.rot_count}]
 
         response.success = True
         return response
@@ -140,10 +140,10 @@ class SatelliteUtils(Node):
 
         rot = 0.0
         r = 12
-        k = 10
+        self.rot_count = 10
 
         x_max, y_max, z_max = 0, 0, 0
-        for i in range(k * 361):
+        for i in range(self.rot_count * 360):
             cur_pos.x = r * cos(rot) / sqrt(2)
             cur_pos.y = r * cos(rot) / sqrt(2)
             cur_pos.z = r * sin(rot)
@@ -169,7 +169,7 @@ class SatelliteUtils(Node):
                     cur_rot.y = (rot - 1.57) * sin(phi)
                     cur_rot.z = phi
 
-            rot += (pi / 180.0) / k
+            rot += (pi / 180.0) / self.rot_count
 
             pose = PoseStamped()
             pose.header.stamp = self.get_clock().now().to_msg()
@@ -186,7 +186,7 @@ class SatelliteUtils(Node):
 
             
             
-        
+        self.get_logger().info(f"path {name} len {len(path.poses)}")
         self.paths[name] = path
         pub = self.create_publisher(Path, 'path_' + name, self.qos)
         pub.publish(path)
