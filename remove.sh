@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '1'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '2'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '3'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '4'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '5'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '6'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '7'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '8'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '9'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '10'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '11'}"
+ros2 service call /satellite_remove satellite_interfaces/srv/SatelliteName "{name: '12'}"
