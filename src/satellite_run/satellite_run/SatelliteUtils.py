@@ -4,8 +4,8 @@ from rclpy.qos import QoSProfile
 from geometry_msgs.msg import Quaternion
 from sensor_msgs.msg import JointState
 from tf2_ros import TransformBroadcaster, TransformStamped
-from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin
-from geometry_msgs.msg import Vector3Stamped, Vector3
+from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin, tan
+from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray
 from satellite_interfaces.msg import SatelliteVec
 from satellite_interfaces.srv import SatelliteName
 from std_msgs.msg import String
@@ -32,7 +32,7 @@ class SatelliteUtils(Node):
         self.satellites_vels = {}
 
         #pos rot data[]
-        #data: path_ind
+        #data: [path_name, path_ind]
         self.satellites = {}
 
         self.timer = self.create_timer(0.01, self.timer_callback)
@@ -43,11 +43,10 @@ class SatelliteUtils(Node):
 
     def gen_paths(self):
         self.make_path('1', [0.0, 0.0, 0.0])
-        self.make_path('2', [0.0, 0.0, 1.57])
-        self.make_path('3', [1.57, 0.0, 0.0])
+        self.make_path('2', [0.0, 0.0, 1.57], 'z')
+        self.make_path('3', [1.57, 0.0, 0.0], 'x')
 
-        self.make_path('4', [0.0, 0.0, 0.785])
-        self.make_path('5', [0.0, 0.0, -0.785])
+        # self.make_path('4', [0.0, 0.0, -0.785], 'z')
 
     def spawn_callback(self, request, response):
         self.get_logger().info(f"spawning {request.name}")
@@ -63,7 +62,6 @@ class SatelliteUtils(Node):
         desc_publisher.publish(msg)        
 
         init_pos = Vector3()
-        # init_pos.z = 12.0
 
         init_pos.x = 0.0
         init_pos.y = 0.0
@@ -74,7 +72,7 @@ class SatelliteUtils(Node):
         init_rot.y = 0.0
         init_rot.z = 0.785
 
-        self.satellites[request.name] = [init_pos, init_rot, [0]]
+        self.satellites[request.name] = [init_pos, init_rot, {'path_name': request.path_name, 'path_ind': 0}]
 
         response.success = True
         return response
@@ -144,18 +142,32 @@ class SatelliteUtils(Node):
         r = 12
         k = 10
 
+        x_max, y_max, z_max = 0, 0, 0
         for i in range(k * 361):
             cur_pos.x = r * cos(rot) / sqrt(2)
             cur_pos.y = r * cos(rot) / sqrt(2)
             cur_pos.z = r * sin(rot)
 
             cur_rot = Vector3()
+            
+            cur_rot.x = 0.0
             cur_rot.y = 1.57 - rot
+            cur_rot.z = 0.0
 
             cur_pos = self.make_rot('z', cur_pos, 0.785)
 
-            for i in range(len(mode)):
-                cur_pos = self.make_rot(mode[i], cur_pos, phis[i])
+            for md in mode:
+                phi = phis[ord(md) - 120]
+                cur_pos = self.make_rot(md, cur_pos, phi)
+
+                if mode == 'x':
+                    cur_rot.x = phi
+                    cur_rot.y = (rot - 1.57) * cos(phi)
+                    cur_rot.z = (rot - 1.57) * sin(phi)
+                elif mode == 'z':
+                    cur_rot.x = (rot - 1.57) * cos(phi)
+                    cur_rot.y = (rot - 1.57) * sin(phi)
+                    cur_rot.z = phi
 
             rot += (pi / 180.0) / k
 
@@ -171,11 +183,16 @@ class SatelliteUtils(Node):
             pose.pose.orientation.z = cur_rot.z
 
             path.poses.append(pose)
+
+            
+            
         
         self.paths[name] = path
         pub = self.create_publisher(Path, 'path_' + name, self.qos)
         pub.publish(path)
 
+    def get_angle(self, vec1, vec2):
+        return acos((vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z) / (sqrt(vec1.x ** 2 + vec1.y ** 2 + vec1.z ** 2) * sqrt(vec2.x ** 2 + vec2.y ** 2 + vec2.z ** 2)))
 
     def perform_gravity(self, frame_id):
         a = 0.01 / 1000
@@ -183,23 +200,21 @@ class SatelliteUtils(Node):
         r = 12.0
         v = sqrt(a * r)
 
-        self.satellites[frame_id][0].x = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.x
-        self.satellites[frame_id][0].y = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.y
-        self.satellites[frame_id][0].z = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.position.z
-        
-        # qx = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.x
-        # qy = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.y
-        # qz = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.z
-        # qw = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.w
-        #from tf_transformations import euler_from_quaternion
-        # roll, pitch, yaw = quaternion_to_euler(qx, qy, qz, qw)
-        self.satellites[frame_id][1].x = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.x
-        self.satellites[frame_id][1].y = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.y
-        self.satellites[frame_id][1].z = self.paths['1'].poses[self.satellites[frame_id][2][0]].pose.orientation.z
+        path_name = self.satellites[frame_id][2]['path_name']
+        path_ind = self.satellites[frame_id][2]['path_ind']
 
-        self.satellites[frame_id][2][0] += 1
-        if self.satellites[frame_id][2][0] >= len(self.paths['1'].poses):
-            self.satellites[frame_id][2][0] = 0
+        self.satellites[frame_id][0].x = self.paths[path_name].poses[path_ind].pose.position.x
+        self.satellites[frame_id][0].y = self.paths[path_name].poses[path_ind].pose.position.y
+        self.satellites[frame_id][0].z = self.paths[path_name].poses[path_ind].pose.position.z
+        
+        self.satellites[frame_id][1].x = self.paths[path_name].poses[path_ind].pose.orientation.x
+        self.satellites[frame_id][1].y = self.paths[path_name].poses[path_ind].pose.orientation.y
+        self.satellites[frame_id][1].z = self.paths[path_name].poses[path_ind].pose.orientation.z
+        
+        if path_ind + 1 == len(self.paths[path_name].poses):
+            self.satellites[frame_id][2]['path_ind'] = 0
+        else:
+            self.satellites[frame_id][2]['path_ind'] += 1
 
         #move to center
         # if self.satellites[frame_id][0].x > 0:
@@ -223,10 +238,6 @@ class SatelliteUtils(Node):
         # self.satellites[frame_id][1].y += w
 
 
-        
-
-
-
 
     def handle_satellites(self, frame_id):
         odom_trans = TransformStamped()
@@ -247,7 +258,6 @@ class SatelliteUtils(Node):
         odom_rot.transform.translation.y = 0.0
         odom_rot.transform.translation.z = 0.0
 
-        # self.perform_rot(frame_id)
         self.perform_gravity(frame_id)
 
         odom_rot.transform.rotation = euler_to_quaternion(self.satellites[frame_id][1].x, self.satellites[frame_id][1].y, self.satellites[frame_id][1].z)
@@ -256,9 +266,6 @@ class SatelliteUtils(Node):
         self.broadcaster.sendTransform(odom_rot)
 
     def timer_callback(self):
-        # for i in self.satellites_vels:
-        #     self.compute_data(i)
-
         for i in self.satellites:
             self.handle_satellites(i)
 
