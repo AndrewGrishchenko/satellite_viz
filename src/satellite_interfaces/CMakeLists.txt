@@ -16,6 +16,7 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SatelliteName.srv"
   "srv/SatelliteSpawn.srv"
+  "srv/OnOffPath.srv"
   "msg/SatelliteVec.msg"
   DEPENDENCIES geometry_msgs
 )

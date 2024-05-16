@@ -7,13 +7,17 @@ from tf2_ros import TransformBroadcaster, TransformStamped
 from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin, tan
 from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray
 from satellite_interfaces.msg import SatelliteVec
-from satellite_interfaces.srv import SatelliteName, SatelliteSpawn
+from satellite_interfaces.srv import SatelliteName, SatelliteSpawn, OnOffPath
 from std_msgs.msg import String
 
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped, Pose
 
 import numpy as np
+
+from orbit_predictor.sources import get_predictor_from_tle_lines
+import datetime
+import time
 
 class SatelliteUtils(Node):
     def __init__(self):
@@ -25,28 +29,42 @@ class SatelliteUtils(Node):
 
         self.spawn_srv = self.create_service(SatelliteSpawn, 'satellite_spawn', self.spawn_callback)
         self.remove_srv = self.create_service(SatelliteName, 'satellite_remove', self.remove_callback)
+        self.path_on_off_srv = self.create_service(OnOffPath, 'path_on_off', self.path_on_off_callback)
 
         # self.qos = QoSProfile(depth=10)
         self.qos = QoSProfile(depth=1, durability=rclpy.qos.QoSDurabilityPolicy.TRANSIENT_LOCAL)
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
 
-        #pos rot data[]
-        #data: [path_name, path_ind]
+        #pos rot path data{}
+        #data: [enable_path]
         self.satellites = {}
 
         self.timer = self.create_timer(0.01, self.timer_callback)
 
         self.paths = {}
 
+        self.epoch_time = round(time.time())
+
+        self.path_pub = self.create_publisher(Path, 'path_1', self.qos)
+        
         self.gen_paths()
 
-    def gen_paths(self):
-        self.make_path('1', [0.0, 0.0, 0.0])
-        self.make_path('2', [0.0, 0.0, 1.57], 'z')
-        self.make_path('3', [1.57, 0.0, 0.0], 'x')
+    def path_on_off_callback(self, request, response):
+        if request.name in self.satellites:
+            self.satellites[request.name][2].poses.clear()
+            if self.satellites[request.name][3]['enable_path']:
+                self.satellites[request.name][3]['enable_path'] = False
+            else:
+                
+                self.satellites[request.name][3]['enable_path'] = True
+            response.success = True
+        else:
+            response.success = False
+        return response
 
-        # self.make_path('4', [0.0, 0.0, -0.785], 'z')
+    def gen_paths(self):
+        self.rot_count = 10
 
     def spawn_callback(self, request, response):
         self.get_logger().info(f"spawning {request.name}")
@@ -72,7 +90,12 @@ class SatelliteUtils(Node):
         init_rot.y = 0.0
         init_rot.z = 0.785
 
-        self.satellites[request.name] = [init_pos, init_rot, {'path_name': request.path_name, 'path_ind': request.start_angle * self.rot_count}]
+        path = Path()
+        path.header.stamp = self.get_clock().now().to_msg()
+        path.header.frame_id = 'base_link'
+
+        # self.satellites[request.name] = [init_pos, init_rot, path, {'path_name': request.path_name, 'path_ind': request.start_angle * self.rot_count}]
+        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': False}]
 
         response.success = True
         return response
@@ -80,141 +103,79 @@ class SatelliteUtils(Node):
     def remove_callback(self, request, response):
         self.get_logger().info(f"removing {request.name}")
 
-        #sending urdf
-        desc_publisher = self.create_publisher(String, 'satellite_' + request.name, self.qos)
+        if request.name not in self.satellites:
+            #sending urdf
+            desc_publisher = self.create_publisher(String, 'satellite_' + request.name, self.qos)
 
-        msg = String()
-        with open("/home/andrew/leto/src/satellite_run/urdf/satellite_empty.urdf", "r") as f:
-            file_data = f.read()
-            file_data = file_data.replace('NAME', request.name)
-            msg.data = file_data
-        desc_publisher.publish(msg)
+            msg = String()
+            with open("/home/andrew/leto/src/satellite_run/urdf/satellite_empty.urdf", "r") as f:
+                file_data = f.read()
+                file_data = file_data.replace('NAME', request.name)
+                msg.data = file_data
+            desc_publisher.publish(msg)
 
-        response.success = True
+            response.success = True
+        else:
+            response.success = False
         return response
 
-    def perform_rot(self, frame_id):
-        r = 12.0
-
-        x_rot = self.satellites[frame_id][1].x
-        y_rot = self.satellites[frame_id][1].y + 1.57
-        z_rot = self.satellites[frame_id][1].z
-
-        x_pos = self.satellites[frame_id][0].x
-        z_pos = self.satellites[frame_id][0].z
-
-        self.satellites[frame_id][0].x = r * cos(z_rot) * cos(y_rot)
-        self.satellites[frame_id][0].y = r * sin(z_rot) * cos(y_rot)
-        self.satellites[frame_id][0].z = -r * sin(y_rot)
-
-        # self.satellites[frame_id][1].y += 0.001
-        # self.satellites[frame_id][1].z = 0.15
-
-    def make_rot(self, mode, cur_pos, phi):
-        if mode == 'x':
-            m = np.array([[1, 0, 0], [0, cos(phi), -sin(phi)], [0, sin(phi), cos(phi)]])
-        elif mode == 'y':
-            m = np.array([[cos(phi), 0, sin(phi)], [0, 1, 0], [-sin(phi), 0, cos(phi)]])
-        elif mode == 'z':
-            m = np.array([[cos(phi), -sin(phi), 0], [sin(phi), cos(phi), 0], [0, 0, 1]])
-
-        pos = np.array([cur_pos.x, cur_pos.y, cur_pos.z])
-        pos = np.dot(pos, m)
-
-        res = Vector3()
-        res.x = pos[0]
-        res.y = pos[1]
-        res.z = pos[2]
-        return res
-
-
-    def make_path(self, name, phis, mode='xyz'):
-        cur_pos = Vector3()
-        cur_pos.x = 0.0
-        cur_pos.y = 0.0
-        cur_pos.z = 0.0
-
-        path = Path()
-        path.header.stamp = self.get_clock().now().to_msg()
-        path.header.frame_id = 'base_link'
-
-        rot = 0.0
-        r = 12
-        self.rot_count = 10
-
-        x_max, y_max, z_max = 0, 0, 0
-        for i in range(self.rot_count * 360):
-            cur_pos.x = r * cos(rot) / sqrt(2)
-            cur_pos.y = r * cos(rot) / sqrt(2)
-            cur_pos.z = r * sin(rot)
-
-            cur_rot = Vector3()
-            
-            cur_rot.x = 0.0
-            cur_rot.y = 1.57 - rot
-            cur_rot.z = 0.0
-
-            cur_pos = self.make_rot('z', cur_pos, 0.785)
-
-            for md in mode:
-                phi = phis[ord(md) - 120]
-                cur_pos = self.make_rot(md, cur_pos, phi)
-
-                if mode == 'x':
-                    cur_rot.x = phi
-                    cur_rot.y = (rot - 1.57) * cos(phi)
-                    cur_rot.z = (rot - 1.57) * sin(phi)
-                elif mode == 'z':
-                    cur_rot.x = (rot - 1.57) * cos(phi)
-                    cur_rot.y = (rot - 1.57) * sin(phi)
-                    cur_rot.z = phi
-
-            rot += (pi / 180.0) / self.rot_count
-
+    def add_path_point(self, frame_id, pos):
+        if self.satellites[frame_id][3]['enable_path']:
             pose = PoseStamped()
             pose.header.stamp = self.get_clock().now().to_msg()
             pose.header.frame_id = 'base_link'
-            pose.pose.position.x = cur_pos.x
-            pose.pose.position.y = cur_pos.y
-            pose.pose.position.z = cur_pos.z
 
-            pose.pose.orientation.x = cur_rot.x
-            pose.pose.orientation.y = cur_rot.y
-            pose.pose.orientation.z = cur_rot.z
+            pose.pose.position.x = pos.x
+            pose.pose.position.y = pos.y
+            pose.pose.position.z = pos.z
 
-            path.poses.append(pose)
+            self.satellites[frame_id][2].poses.append(pose)
 
-            
-            
-        self.get_logger().info(f"path {name} len {len(path.poses)}")
-        self.paths[name] = path
-        pub = self.create_publisher(Path, 'path_' + name, self.qos)
-        pub.publish(path)
-
-    def get_angle(self, vec1, vec2):
-        return acos((vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z) / (sqrt(vec1.x ** 2 + vec1.y ** 2 + vec1.z ** 2) * sqrt(vec2.x ** 2 + vec2.y ** 2 + vec2.z ** 2)))
+    def update_paths(self, frame_id):
+        self.path_pub.publish(self.satellites[frame_id][2])
 
     def perform_gravity(self, frame_id):
-        a = 0.01 / 1000
-        # v = 4 / 1000
-        r = 12.0
-        v = sqrt(a * r)
-
-        path_name = self.satellites[frame_id][2]['path_name']
-        path_ind = self.satellites[frame_id][2]['path_ind']
-
-        self.satellites[frame_id][0].x = self.paths[path_name].poses[path_ind].pose.position.x
-        self.satellites[frame_id][0].y = self.paths[path_name].poses[path_ind].pose.position.y
-        self.satellites[frame_id][0].z = self.paths[path_name].poses[path_ind].pose.position.z
+        # TLE_LINES = (
+        #     "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
+        #     "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
+        # )
+        TLE_LINES = (
+            "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
+            "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
+        )
+        predictor = get_predictor_from_tle_lines(TLE_LINES)
         
-        self.satellites[frame_id][1].x = self.paths[path_name].poses[path_ind].pose.orientation.x
-        self.satellites[frame_id][1].y = self.paths[path_name].poses[path_ind].pose.orientation.y
-        self.satellites[frame_id][1].z = self.paths[path_name].poses[path_ind].pose.orientation.z
+        k = 166
+        pos = predictor.get_position(datetime.datetime.utcfromtimestamp(self.epoch_time))
         
-        if path_ind + 1 == len(self.paths[path_name].poses):
-            self.satellites[frame_id][2]['path_ind'] = 0
-        else:
-            self.satellites[frame_id][2]['path_ind'] += 1
+        pos_x, pos_y, pos_z = pos.position_ecef
+        pos_x /= k
+        pos_y /= k
+        pos_z /= k
+        # self.get_logger().info(f"x {x} y {y} z {z}")
+
+        self.satellites[frame_id][0].x = pos_x
+        self.satellites[frame_id][0].y = pos_y
+        self.satellites[frame_id][0].z = pos_z
+
+        #TODO
+        vel_x, vel_y, vel_z = pos.velocity_ecef
+        vel_k = 3.14
+        vel_x /= vel_k
+        vel_y /= vel_k
+        vel_z /= vel_k
+
+        # self.satellites[frame_id][1].x = vel_x
+        # self.satellites[frame_id][1].y = vel_y
+        # self.satellites[frame_id][1].z = vel_x
+        # self.get_logger().info(f"vel_x {vel_x} vel_y {vel_y} vel_z {vel_z}")
+
+        self.epoch_time += 1
+
+        self.add_path_point('1', self.satellites[frame_id][0])
+
+        # self.satellites[frame_id][0].x = 
+
 
         #move to center
         # if self.satellites[frame_id][0].x > 0:
@@ -268,6 +229,7 @@ class SatelliteUtils(Node):
     def timer_callback(self):
         for i in self.satellites:
             self.handle_satellites(i)
+            self.update_paths(i)
 
     def vel_callback(self, msg):
         self.satellites[msg.name][2] = msg.vector
