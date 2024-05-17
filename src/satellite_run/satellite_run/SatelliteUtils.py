@@ -34,7 +34,6 @@ class SatelliteUtils(Node):
         self.sim_on_off_srv = self.create_service(Trigger, 'sim_on_off', self.sim_on_off_callback)
         self.all_path_on_off_srv = self.create_service(Trigger, 'all_path_on_off', self.all_path_on_off_callback)
 
-        # self.qos = QoSProfile(depth=10)
         self.qos = QoSProfile(depth=1, durability=rclpy.qos.QoSDurabilityPolicy.TRANSIENT_LOCAL)
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
@@ -52,17 +51,16 @@ class SatelliteUtils(Node):
 
         self.epoch_time = round(time.time())
 
-        # self.path_pub = self.create_publisher(Path, 'path_1', self.qos)
         self.path_pubs = {}
         for i in range(1, 13):
             self.path_pubs[str(i)] = self.create_publisher(Path, 'path_' + str(i), self.qos)
         
-        self.kepler_i_sat = {'1': '03.7500', '2': '11.2500', '3': '18.7500', '4': '26.2500', '5': '33.7500',
-        '6': '41.2500', '7': '48.7500', '8': '56.2500', '9': '63.7500', '10': '71.2500', '11': '78.7500', '12': '86.2500'}
-        self.TLE_LINES = (
-            "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
-            "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
-        )
+        self.TLE = {}
+        with open('/home/andrew/leto/src/satellite_run/resource/tle') as f:
+            data = f.read().split('\n')
+            data = [i for i in data if i != '']
+            for i in range(0, len(data), 3):
+                self.TLE[data[i]] = (data[i+1], data[i+2])
 
         self.gen_paths()
 
@@ -133,16 +131,7 @@ class SatelliteUtils(Node):
         path.header.stamp = self.get_clock().now().to_msg()
         path.header.frame_id = 'base_link'
 
-        # self.satellites[request.name] = [init_pos, init_rot, path, {'path_name': request.path_name, 'path_ind': request.start_angle * self.rot_count}]
-        TLE = self.TLE_LINES
-        TLE = (
-            TLE[0],
-            TLE[1].replace('51.6378', str(self.kepler_i_sat[request.name]))
-        )
-
-        # self.get_logger().info(f"sat {request.name} TLE: {TLE}")
-        
-        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': True, 'predictor': get_predictor_from_tle_lines(TLE)}]
+        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': True, 'predictor': get_predictor_from_tle_lines(self.TLE[request.name])}]
 
         response.success = True
         return response
@@ -180,19 +169,8 @@ class SatelliteUtils(Node):
 
     def update_paths(self, frame_id):
         self.path_pubs[frame_id].publish(self.satellites[frame_id][2])
-        # self.path_pub.publish(self.satellites[frame_id][2])
 
     def perform_gravity(self, frame_id):
-        # TLE_LINES = (
-        #     "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
-        #     "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
-        # )
-        # TLE_LINES = (
-        #     "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
-        #     "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
-        # )
-        # predictor = get_predictor_from_tle_lines(TLE_LINES)
-        
         predictor = self.satellites[frame_id][3]['predictor']
 
         k = 166
@@ -202,7 +180,6 @@ class SatelliteUtils(Node):
         pos_x /= k
         pos_y /= k
         pos_z /= k
-        # self.get_logger().info(f"x {x} y {y} z {z}")
 
         self.satellites[frame_id][0].x = pos_x
         self.satellites[frame_id][0].y = pos_y
@@ -215,41 +192,9 @@ class SatelliteUtils(Node):
         vel_y /= vel_k
         vel_z /= vel_k
 
-        # self.satellites[frame_id][1].x = vel_x
-        # self.satellites[frame_id][1].y = vel_y
-        # self.satellites[frame_id][1].z = vel_x
-        # self.get_logger().info(f"vel_x {vel_x} vel_y {vel_y} vel_z {vel_z}")
-
         self.epoch_time += 1
 
-        # self.add_path_point('1', self.satellites[frame_id][0])
         self.add_path_point(frame_id, self.satellites[frame_id][0])
-
-        # self.satellites[frame_id][0].x = 
-
-
-        #move to center
-        # if self.satellites[frame_id][0].x > 0:
-        #     self.satellites[frame_id][0].x += a * sin(self.satellites[frame_id][1].y)
-        # else:
-        #     self.satellites[frame_id][0].x -= a * sin(self.satellites[frame_id][1].y)
-        
-        # if self.satellites[frame_id][0].z > 0:
-        #     self.satellites[frame_id][0].z += a * cos(self.satellites[frame_id][1].y)
-        # else:
-        #     self.satellites[frame_id][0].z -= a * cos(self.satellites[frame_id][1].y)
-
-
-        #move by tangent
-        # self.satellites[frame_id][0].x += -v * cos(self.satellites[frame_id][1].y)
-        # self.satellites[frame_id][0].y += -v * cos(self.satellites[frame_id][1].y)
-        # self.satellites[frame_id][0].z += v * sin(self.satellites[frame_id][1].y)
-
-        #increasing angular velocity
-        # w = v / r
-        # self.satellites[frame_id][1].y += w
-
-
 
     def handle_satellites(self, frame_id):
         odom_trans = TransformStamped()
