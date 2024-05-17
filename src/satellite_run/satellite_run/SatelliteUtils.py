@@ -9,6 +9,7 @@ from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray
 from satellite_interfaces.msg import SatelliteVec
 from satellite_interfaces.srv import SatelliteName, SatelliteSpawn, OnOffPath
 from std_msgs.msg import String
+from std_srvs.srv import Trigger
 
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped, Pose
@@ -30,12 +31,17 @@ class SatelliteUtils(Node):
         self.spawn_srv = self.create_service(SatelliteSpawn, 'satellite_spawn', self.spawn_callback)
         self.remove_srv = self.create_service(SatelliteName, 'satellite_remove', self.remove_callback)
         self.path_on_off_srv = self.create_service(OnOffPath, 'path_on_off', self.path_on_off_callback)
+        self.sim_on_off_srv = self.create_service(Trigger, 'sim_on_off', self.sim_on_off_callback)
+        self.all_path_on_off_srv = self.create_service(Trigger, 'all_path_on_off', self.all_path_on_off_callback)
 
         # self.qos = QoSProfile(depth=10)
         self.qos = QoSProfile(depth=1, durability=rclpy.qos.QoSDurabilityPolicy.TRANSIENT_LOCAL)
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
 
+        self.ENABLE = True
+        self.PATH_ENABLE = True
+        
         #pos rot path data{}
         #data: [enable_path]
         self.satellites = {}
@@ -46,9 +52,36 @@ class SatelliteUtils(Node):
 
         self.epoch_time = round(time.time())
 
-        self.path_pub = self.create_publisher(Path, 'path_1', self.qos)
+        # self.path_pub = self.create_publisher(Path, 'path_1', self.qos)
+        self.path_pubs = {}
+        for i in range(1, 13):
+            self.path_pubs[str(i)] = self.create_publisher(Path, 'path_' + str(i), self.qos)
         
+        self.kepler_i_sat = {'1': '03.7500', '2': '11.2500', '3': '18.7500', '4': '26.2500', '5': '33.7500',
+        '6': '41.2500', '7': '48.7500', '8': '56.2500', '9': '63.7500', '10': '71.2500', '11': '78.7500', '12': '86.2500'}
+        self.TLE_LINES = (
+            "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
+            "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
+        )
+
         self.gen_paths()
+
+    def sim_on_off_callback(self, request, response):
+        self.ENABLE = not self.ENABLE
+        response.success = True
+        response.message = ""
+        return response
+
+    def all_path_on_off_callback(self, request, response):
+        self.PATH_ENABLE = not self.PATH_ENABLE
+
+        for i in self.satellites:
+            self.satellites[i][2].poses.clear()
+            self.satellites[i][3]['enable_path'] = self.PATH_ENABLE
+        
+        response.success = True
+        response.message = ""
+        return response
 
     def path_on_off_callback(self, request, response):
         if request.name in self.satellites:
@@ -65,6 +98,12 @@ class SatelliteUtils(Node):
 
     def gen_paths(self):
         self.rot_count = 10
+        
+        for i in self.path_pubs:
+            path = Path()
+            path.header.stamp = self.get_clock().now().to_msg()
+            path.header.frame_id = 'base_link'
+            self.path_pubs[i].publish(path)
 
     def spawn_callback(self, request, response):
         self.get_logger().info(f"spawning {request.name}")
@@ -95,7 +134,15 @@ class SatelliteUtils(Node):
         path.header.frame_id = 'base_link'
 
         # self.satellites[request.name] = [init_pos, init_rot, path, {'path_name': request.path_name, 'path_ind': request.start_angle * self.rot_count}]
-        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': False}]
+        TLE = self.TLE_LINES
+        TLE = (
+            TLE[0],
+            TLE[1].replace('51.6378', str(self.kepler_i_sat[request.name]))
+        )
+
+        # self.get_logger().info(f"sat {request.name} TLE: {TLE}")
+        
+        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': True, 'predictor': get_predictor_from_tle_lines(TLE)}]
 
         response.success = True
         return response
@@ -132,19 +179,22 @@ class SatelliteUtils(Node):
             self.satellites[frame_id][2].poses.append(pose)
 
     def update_paths(self, frame_id):
-        self.path_pub.publish(self.satellites[frame_id][2])
+        self.path_pubs[frame_id].publish(self.satellites[frame_id][2])
+        # self.path_pub.publish(self.satellites[frame_id][2])
 
     def perform_gravity(self, frame_id):
         # TLE_LINES = (
         #     "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
         #     "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
         # )
-        TLE_LINES = (
-            "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
-            "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
-        )
-        predictor = get_predictor_from_tle_lines(TLE_LINES)
+        # TLE_LINES = (
+        #     "1 25544U 98067A   24136.79884226  .00020274  00000+0  34526-3 0  9999",
+        #     "2 25544  51.6378 115.9329 0003286 171.4661 259.6570 15.51363823453527"
+        # )
+        # predictor = get_predictor_from_tle_lines(TLE_LINES)
         
+        predictor = self.satellites[frame_id][3]['predictor']
+
         k = 166
         pos = predictor.get_position(datetime.datetime.utcfromtimestamp(self.epoch_time))
         
@@ -172,7 +222,8 @@ class SatelliteUtils(Node):
 
         self.epoch_time += 1
 
-        self.add_path_point('1', self.satellites[frame_id][0])
+        # self.add_path_point('1', self.satellites[frame_id][0])
+        self.add_path_point(frame_id, self.satellites[frame_id][0])
 
         # self.satellites[frame_id][0].x = 
 
@@ -227,9 +278,10 @@ class SatelliteUtils(Node):
         self.broadcaster.sendTransform(odom_rot)
 
     def timer_callback(self):
-        for i in self.satellites:
-            self.handle_satellites(i)
-            self.update_paths(i)
+        if self.ENABLE:
+            for i in self.satellites:
+                self.handle_satellites(i)
+                self.update_paths(i)
 
     def vel_callback(self, msg):
         self.satellites[msg.name][2] = msg.vector
