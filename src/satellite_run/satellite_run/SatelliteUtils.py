@@ -5,8 +5,8 @@ from geometry_msgs.msg import Quaternion
 from sensor_msgs.msg import JointState
 from tf2_ros import TransformBroadcaster, TransformStamped
 from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin, tan
-from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray
-from satellite_interfaces.msg import SatelliteVec
+from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray, PointStamped
+from satellite_interfaces.msg import SatelliteVec, TLEEdit
 from satellite_interfaces.srv import SatelliteName, SatelliteSpawn, OnOffPath
 from std_msgs.msg import String
 from std_srvs.srv import Trigger
@@ -28,6 +28,8 @@ class SatelliteUtils(Node):
         self.pos_sub = self.create_subscription(SatelliteVec, 'satellite_set_pos', self.pos_callback, 10)
         self.rot_sub = self.create_subscription(SatelliteVec, 'satellite_set_rot', self.rot_callback, 10)
 
+        self.tle_sub = self.create_subscription(TLEEdit, 'tle_edit', self.tle_callback, 10)
+
         self.spawn_srv = self.create_service(SatelliteSpawn, 'satellite_spawn', self.spawn_callback)
         self.remove_srv = self.create_service(SatelliteName, 'satellite_remove', self.remove_callback)
         self.path_on_off_srv = self.create_service(OnOffPath, 'path_on_off', self.path_on_off_callback)
@@ -38,18 +40,26 @@ class SatelliteUtils(Node):
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
 
-        self.ENABLE = True
-        self.PATH_ENABLE = True
+        self.ENABLE = False
+        self.PATH_ENABLE = False
+        self.DISTANCE_ENABLE = True
+
+        self.EDIT_TLE = False
         
         #pos rot path data{}
         #data: [enable_path]
         self.satellites = {}
 
-        self.timer = self.create_timer(0.01, self.timer_callback)
+        self.timer = self.create_timer(0.1, self.timer_callback)
 
         self.paths = {}
 
         self.epoch_time = round(time.time())
+
+        self.path_d_pub = self.create_publisher(Path, 'path_d', self.qos)
+        self.point_click_sub = self.create_subscription(PointStamped, 'clicked_point', self.point_click_callback, 10)
+        self.point = Vector3()
+        self.d_epsilon = 40
 
         self.path_pubs = {}
         for i in range(1, 13):
@@ -66,12 +76,14 @@ class SatelliteUtils(Node):
 
     def sim_on_off_callback(self, request, response):
         self.ENABLE = not self.ENABLE
+        self.get_logger().info(f"sim now is {'ENABLED' if self.ENABLE else 'DISABLED'}")
         response.success = True
         response.message = ""
         return response
 
     def all_path_on_off_callback(self, request, response):
         self.PATH_ENABLE = not self.PATH_ENABLE
+        self.get_logger().info(f"all paths now are {'ENABLED' if self.PATH_ENABLE else 'DISABLED'}")
 
         for i in self.satellites:
             self.satellites[i][2].poses.clear()
@@ -131,7 +143,7 @@ class SatelliteUtils(Node):
         path.header.stamp = self.get_clock().now().to_msg()
         path.header.frame_id = 'base_link'
 
-        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': True, 'predictor': get_predictor_from_tle_lines(self.TLE[request.name])}]
+        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': self.PATH_ENABLE, 'predictor': get_predictor_from_tle_lines(self.TLE[request.name])}]
 
         response.success = True
         return response
@@ -169,6 +181,41 @@ class SatelliteUtils(Node):
 
     def update_paths(self, frame_id):
         self.path_pubs[frame_id].publish(self.satellites[frame_id][2])
+
+    def calc_distance(self, pos1, pos2):
+        return sqrt((pos2.x - pos1.x) ** 2 + (pos2.y - pos1.y) ** 2 + (pos2.z - pos1.z) ** 2)
+
+    def pose_from_vec(self, vec):
+        pose = PoseStamped()
+        pose.header.stamp = self.get_clock().now().to_msg()
+        pose.header.frame_id = 'base_link'
+        pose.pose.position.x = vec.x
+        pose.pose.position.y = vec.y
+        pose.pose.position.z = vec.z
+        return pose
+
+    def point_click_callback(self, msg):
+        self.point = msg.point
+
+    def perform_distance(self):
+        path = Path()
+        path.header.stamp = self.get_clock().now().to_msg()
+        path.header.frame_id = 'base_link'
+
+        for i in self.satellites:
+            if self.calc_distance(self.point, self.satellites[i][0]) < self.d_epsilon:
+                pose1 = self.pose_from_vec(self.point)
+                pose2 = self.pose_from_vec(self.satellites[i][0])
+                
+                path.poses.append(pose1)
+                path.poses.append(pose2)
+                path.poses.append(pose1)
+            else:
+                # self.get_logger().info(f"{self.calc_distance(self.point, self.satellites[i][0])}")
+                pass
+        
+        self.path_d_pub.publish(path)
+
 
     def perform_gravity(self, frame_id):
         predictor = self.satellites[frame_id][3]['predictor']
@@ -223,10 +270,22 @@ class SatelliteUtils(Node):
         self.broadcaster.sendTransform(odom_rot)
 
     def timer_callback(self):
-        if self.ENABLE:
+        if self.ENABLE and not self.EDIT_TLE:
             for i in self.satellites:
                 self.handle_satellites(i)
                 self.update_paths(i)
+            self.perform_distance()
+    
+#edit tle mode: replace string with num of chars in realtime
+
+    def change_tle_element(self, old, new):
+        pass
+
+    def tle_callback(self, msg):
+        if not self.EDIT_TLE:
+            return
+        
+
 
     def vel_callback(self, msg):
         self.satellites[msg.name][2] = msg.vector
