@@ -6,7 +6,7 @@ from sensor_msgs.msg import JointState
 from tf2_ros import TransformBroadcaster, TransformStamped
 from math import sin, cos, pi, atan, acos, sqrt, pi, atan2, asin, tan
 from geometry_msgs.msg import Vector3Stamped, Vector3, PoseArray, PointStamped
-from satellite_interfaces.msg import SatelliteVec, TLEEdit
+from satellite_interfaces.msg import SatelliteVec
 from satellite_interfaces.srv import SatelliteName, SatelliteSpawn, OnOffPath
 from std_msgs.msg import String
 from std_srvs.srv import Trigger
@@ -23,34 +23,25 @@ import time
 class SatelliteUtils(Node):
     def __init__(self):
         super().__init__('satellite_utils')
-        
-        self.vel_sub = self.create_subscription(SatelliteVec, 'satellite_set_vel', self.vel_callback, 10)
-        self.pos_sub = self.create_subscription(SatelliteVec, 'satellite_set_pos', self.pos_callback, 10)
-        self.rot_sub = self.create_subscription(SatelliteVec, 'satellite_set_rot', self.rot_callback, 10)
-
-        self.tle_sub = self.create_subscription(TLEEdit, 'tle_edit', self.tle_callback, 10)
 
         self.spawn_srv = self.create_service(SatelliteSpawn, 'satellite_spawn', self.spawn_callback)
         self.remove_srv = self.create_service(SatelliteName, 'satellite_remove', self.remove_callback)
-        self.path_on_off_srv = self.create_service(OnOffPath, 'path_on_off', self.path_on_off_callback)
         self.sim_on_off_srv = self.create_service(Trigger, 'sim_on_off', self.sim_on_off_callback)
-        self.all_path_on_off_srv = self.create_service(Trigger, 'all_path_on_off', self.all_path_on_off_callback)
+        self.path_on_off_srv = self.create_service(Trigger, 'path_on_off', self.path_on_off_callback)
 
         self.qos = QoSProfile(depth=1, durability=rclpy.qos.QoSDurabilityPolicy.TRANSIENT_LOCAL)
         self.broadcaster = TransformBroadcaster(self, qos=QoSProfile(depth=10))
         self.satellites_vels = {}
 
-        self.ENABLE = False
+        self.ENABLE = True
         self.PATH_ENABLE = False
         self.DISTANCE_ENABLE = True
-
-        self.EDIT_TLE = False
         
         #pos rot path data{}
-        #data: [enable_path]
+        #data: [predictor]
         self.satellites = {}
 
-        self.timer = self.create_timer(0.1, self.timer_callback)
+        self.timer = self.create_timer(0.05, self.timer_callback)
 
         self.paths = {}
 
@@ -73,6 +64,16 @@ class SatelliteUtils(Node):
                 self.TLE[data[i]] = (data[i+1], data[i+2])
 
         self.gen_paths()
+        self.fill_sats()
+
+
+    def fill_sats(self):
+        req = SatelliteSpawn.Request()
+        res = SatelliteSpawn.Response()
+        
+        for i in range(1, 13):
+            req.name = str(i)
+            self.spawn_callback(req, res)
 
     def sim_on_off_callback(self, request, response):
         self.ENABLE = not self.ENABLE
@@ -81,7 +82,7 @@ class SatelliteUtils(Node):
         response.message = ""
         return response
 
-    def all_path_on_off_callback(self, request, response):
+    def path_on_off_callback(self, request, response):
         self.PATH_ENABLE = not self.PATH_ENABLE
         self.get_logger().info(f"all paths now are {'ENABLED' if self.PATH_ENABLE else 'DISABLED'}")
 
@@ -91,19 +92,6 @@ class SatelliteUtils(Node):
         
         response.success = True
         response.message = ""
-        return response
-
-    def path_on_off_callback(self, request, response):
-        if request.name in self.satellites:
-            self.satellites[request.name][2].poses.clear()
-            if self.satellites[request.name][3]['enable_path']:
-                self.satellites[request.name][3]['enable_path'] = False
-            else:
-                
-                self.satellites[request.name][3]['enable_path'] = True
-            response.success = True
-        else:
-            response.success = False
         return response
 
     def gen_paths(self):
@@ -121,7 +109,7 @@ class SatelliteUtils(Node):
         #sending urdf
         desc_publisher = self.create_publisher(String, 'satellite_' + request.name, self.qos)
         msg = String()
-        with open("/home/andrew/leto/src/satellite_run/urdf/satellite_new.urdf", "r") as f:
+        with open("/home/andrew/leto/src/satellite_run/urdf/satellite.urdf", "r") as f:
             file_data = f.read()
             file_data = file_data.replace('NAME', request.name)
 
@@ -143,7 +131,7 @@ class SatelliteUtils(Node):
         path.header.stamp = self.get_clock().now().to_msg()
         path.header.frame_id = 'base_link'
 
-        self.satellites[request.name] = [init_pos, init_rot, path, {'enable_path': self.PATH_ENABLE, 'predictor': get_predictor_from_tle_lines(self.TLE[request.name])}]
+        self.satellites[request.name] = [init_pos, init_rot, path, {'predictor': get_predictor_from_tle_lines(self.TLE[request.name])}]
 
         response.success = True
         return response
@@ -168,7 +156,7 @@ class SatelliteUtils(Node):
         return response
 
     def add_path_point(self, frame_id, pos):
-        if self.satellites[frame_id][3]['enable_path']:
+        if self.PATH_ENABLE:
             pose = PoseStamped()
             pose.header.stamp = self.get_clock().now().to_msg()
             pose.header.frame_id = 'base_link'
@@ -270,31 +258,11 @@ class SatelliteUtils(Node):
         self.broadcaster.sendTransform(odom_rot)
 
     def timer_callback(self):
-        if self.ENABLE and not self.EDIT_TLE:
+        if self.ENABLE:
             for i in self.satellites:
                 self.handle_satellites(i)
                 self.update_paths(i)
             self.perform_distance()
-    
-#edit tle mode: replace string with num of chars in realtime
-
-    def change_tle_element(self, old, new):
-        pass
-
-    def tle_callback(self, msg):
-        if not self.EDIT_TLE:
-            return
-        
-
-
-    def vel_callback(self, msg):
-        self.satellites[msg.name][2] = msg.vector
-
-    def pos_callback(self, msg):
-        self.satellites[msg.name][0] = msg.vector
-
-    def rot_callback(self, msg):
-        self.satellites[msg.name][1] = msg.vector
 
 def euler_to_quaternion(roll, pitch, yaw):
     qx = sin(roll/2) * cos(pitch/2) * cos(yaw/2) - cos(roll/2) * sin(pitch/2) * sin(yaw/2)

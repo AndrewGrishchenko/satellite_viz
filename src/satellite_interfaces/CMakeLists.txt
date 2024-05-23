@@ -18,7 +18,6 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SatelliteSpawn.srv"
   "srv/OnOffPath.srv"
   "msg/SatelliteVec.msg"
-  "msg/TLEEdit.msg"
   DEPENDENCIES geometry_msgs
 )
 
