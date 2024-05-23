@@ -1,0 +1,12 @@
+<robot name="earth">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <sphere radius="10"/>
+      </geometry>
+      <material name="green" >
+        <color rgba="0 1 0 1" />
+      </material>
+    </visual>
+  </link>
+</robot>
